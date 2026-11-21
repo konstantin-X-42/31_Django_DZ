@@ -190,3 +190,9 @@ poetry add django-filter
 
 #### 31 устанавливаем библиотеку djangorestframework-simplejwt для работы с JWT-токенами
 poetry add djangorestframework-simplejwt
+
+#### 31 создаем директорию fixtures внутри приложения users
+mkdir users\fixtures
+
+#### 31 выгружаем группы пользователей в fixtures
+poetry run python -Xutf8 manage.py dumpdata auth.group --indent 2 -o users/fixtures/groups.json
