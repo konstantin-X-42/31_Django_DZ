@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
@@ -23,6 +24,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # 30.2 подключаем библиотеку django-filter для фильтрации данных в API
     'django_filters',
+    # 31 подключаем библиотеку для работы с JWT-аутентификацией
+    'rest_framework_simplejwt',
 
     # 30.1 регистрируем созданные приложения проекта
     'users',
@@ -30,11 +33,26 @@ INSTALLED_APPS = [
 ]
 
 
-# 30.2 настраиваем глобальный бэкенд фильтрации DRF для всех представлений проекта
+# 31 настраиваем глобальные параметры DRF: фильтрацию, JWT-аутентификацию и доступ по умолчанию
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+    # 31 устанавливаем JWT-аутентификацию в качестве основного способа проверки токенов
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    # 31 закрываем все эндпоинты проекта по умолчанию только для авторизованных пользователей
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+
+# 31 задаем время жизни access и refresh JWT-токенов
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
 

@@ -187,3 +187,6 @@ poetry run python -Xutf8 manage.py dumpdata users.Payment --indent 2 -o payments
 
 #### 30.2 устанавливаем библиотеку django-filter через Poetry для фильтрации и сортировки в DRF
 poetry add django-filter
+
+#### 31 устанавливаем библиотеку djangorestframework-simplejwt для работы с JWT-токенами
+poetry add djangorestframework-simplejwt
