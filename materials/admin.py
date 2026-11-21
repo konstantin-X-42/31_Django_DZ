@@ -4,11 +4,15 @@ from materials.models import Course, Lesson
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    # 30.1 настраиваем отображение списка курсов в административной панели
-    list_display = ('id', 'title')
+    # 31 добавляем отображение владельца курса в списке объектов административной панели
+    list_display = ('id', 'title', 'owner')
+    # 31 добавляем фильтр по владельцу для удобного поиска в админке
+    list_filter = ('owner',)
 
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    # 30.1 настраиваем отображение списка уроков с привязкой к курсу в административной панели
-    list_display = ('id', 'title', 'course')
+    # 31 добавляем отображение владельца урока в списке объектов административной панели
+    list_display = ('id', 'title', 'course', 'owner')
+    # 31 добавляем фильтрацию по курсу и владельцу в админке
+    list_filter = ('course', 'owner')
